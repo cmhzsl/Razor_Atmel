@@ -109,6 +109,68 @@ void main(void)
     HEARTBEAT_OFF();
     SystemSleep();
     HEARTBEAT_ON();
+    LedOff(WHITE);
+    LedOff(PURPLE);
+    LedOff(BLUE);
+    LedOff(CYAN);
+    LedOff(GREEN);
+    LedOff(YELLOW);
+    LedOff(ORANGE);
+    LedOff(RED);
+   static u16 u16BlinkCount = 0;
+   u16BlinkCount++;
+   if(u16BlinkCount>=0&&u16BlinkCount<=1000)
+{
+  LedOn(RED);
+ LedPWM(RED, LED_PWM_50);
+}
+   if(u16BlinkCount>=1000&&u16BlinkCount<=2000)
+   {
+     LedOff(RED);
+    LedOn(ORANGE);
+    LedPWM(ORANGE, LED_PWM_50);
+   }
+   if(u16BlinkCount>=2000&&u16BlinkCount<=3000)
+   {
+     LedOff(ORANGE);
+    LedOn(YELLOW);
+    LedPWM(YELLOW, LED_PWM_50);
+   }
+   if(u16BlinkCount>=3000&&u16BlinkCount<=4000)
+   {
+     LedOff(YELLOW);
+    LedOn(GREEN);
+    LedPWM(GREEN, LED_PWM_50);
+   }
+   if(u16BlinkCount>=4000&&u16BlinkCount<=5000)
+   {
+     LedOff(GREEN);
+    LedOn(CYAN);
+    LedPWM(CYAN, LED_PWM_50);
+   }
+   if(u16BlinkCount>=5000&&u16BlinkCount<=6000)
+   {
+     LedOff(CYAN);
+    LedOn(BLUE);
+    LedPWM(BLUE, LED_PWM_50);
+   }
+   if(u16BlinkCount>=6000&&u16BlinkCount<=7000)
+   {
+     LedOff(BLUE);
+    LedOn(PURPLE);
+    LedPWM(PURPLE, LED_PWM_50);
+   }
+   if(u16BlinkCount>=7000&&u16BlinkCount<=8000)
+   {
+     LedOff(PURPLE);
+    LedOn(WHITE);
+    LedPWM(WHITE, LED_PWM_50);
+    u16BlinkCount=0;
+   }
+    //LedPWM(BLUE, LED_PWM_5);
+   
+
+
     
   } /* end while(1) main super loop */
   

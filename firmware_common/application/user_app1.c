@@ -92,6 +92,7 @@ void UserApp1Initialize(void)
   if( 1 )
   {
     UserApp1_StateMachine = UserApp1SM_Idle;
+    
   }
   else
   {
