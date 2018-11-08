@@ -227,6 +227,11 @@ AntApplicationMessageType G_eAntApiCurrentMessageClass = ANT_EMPTY;     /* Type 
 u8 G_au8AntApiCurrentMessageBytes[ANT_APPLICATION_MESSAGE_BYTES];       /* Array for message payload data */
 AntExtendedDataType G_sAntApiCurrentMessageExtData;                     /* Extended data struct for the current message */
 
+/* Existing variables */
+extern u32 G_u32AntApiCurrentMessageTimeStamp;                    
+extern AntApplicationMessageType G_eAntApiCurrentMessageClass;    
+extern u8 G_au8AntApiCurrentMessageBytes[ANT_APPLICATION_MESSAGE_BYTES];  
+extern AntExtendedDataType G_sAntApiCurrentMessageExtData;
 
 /*----------------------------------------------------------------------------*/
 /* Existing variables (defined in other files -- should all contain the "extern" keyword) 
