@@ -57,9 +57,7 @@ extern volatile u32 G_u32SystemTime1s;                 /* From board-specific so
 Global variable definitions with scope limited to this local application.
 Variable names shall start with "UserApp1_" and be declared as static.
 ***********************************************************************************************************************/
-static fnCode_type UserApp1_StateMachine;            /* The state machine function pointer */
-//static u32 UserApp1_u32Timeout;                      /* Timeout counter used across states */
-
+static fnCode_type UserApp1_StateMachine;
 
 /**********************************************************************************************************************
 Function Definitions
@@ -87,6 +85,9 @@ Promises:
 */
 void UserApp1Initialize(void)
 {
+  LedOff(RED);
+  LedOff(YELLOW);
+  LedOff(GREEN);
  
   /* If good initialization, set state to Idle */
   if( 1 )
@@ -137,7 +138,81 @@ State Machine Function Definitions
 /* Wait for ??? */
 static void UserApp1SM_Idle(void)
 {
+  //void LCDClearChars(u8 u8Address_, u8 u8CharactersToClear_);
+  static u32 u32AntDataCount;
+  static u32 u32AntTickCount;
+  static u8 u8BlinkCount =140;
+  static u32 UserApp1_u32DataMsgCount = 0;   /* ANT_DATA packets received */
+  static u32 UserApp1_u32TickMsgCount = 0;   /* ANT_TICK packets received */
+  static u8 au8DataContent_Rate1[] = "safe";
+  static u8 au8DataContent_Rate2[] = "warning";
+  static u8 au8DataContent_Rate3[] = "danger";
+  static u8 au8DataContent_Rate4[] = "       ";
+  //static u8 au8DataContent_Rate5[] = "danger";
+ // UserApp1_StateMachine = UserApp1SM_AntChannelAssign;
+ // NumberToAscii(G_au8AntApiCurrentMessageBytes[7], au8DataContent_Rate1);
+  
+  if(0 < u8BlinkCount && u8BlinkCount < 140)
+  {
+    LedOn(GREEN);
+    LedOff(YELLOW);
+    //LedPWM(GREEN, LED_PWM_20);
+    //LCDMessage(LINE1_START_ADDR, u8BlinkCount);
+    LCDCommand(LCD_CLEAR_CMD);
+    LCDMessage(LINE2_START_ADDR, au8DataContent_Rate1);
+    LedOn(PURPLE);
 
+   
+  }
+ else
+ {
+    LedOff(GREEN);
+    LedOn(YELLOW);
+    //LedPWM(YELLOW, LED_PWM_20);
+    LCDCommand(LCD_CLEAR_CMD);
+    LCDMessage(LINE1_START_ADDR, au8DataContent_Rate2); 
+ }
+  /*
+  if(140 <= u8BlinkCount && u8BlinkCount <= 160)
+  {
+    LedOff(GREEN);
+    LedOn(YELLOW);
+    LedPWM(YELLOW, LED_PWM_20);
+    LCDCommand(LCD_CLEAR_CMD);
+    LCDMessage(LINE1_START_ADDR, au8DataContent_Rate2);
+  }
+  
+  if(u8BlinkCount>160)
+  {
+    LedOff(YELLOW);
+    LedOn(RED);
+    LedPWM(RED, LED_PWM_20);
+    LCDCommand(LCD_CLEAR_CMD);
+    LCDMessage(LINE2_START_ADDR, au8DataContent_Rate3);
+  }
+ */
+  
+  if(WasButtonPressed(BUTTON3))
+  {
+    ButtonAcknowledge(BUTTON3);
+    u8BlinkCount = u8BlinkCount + 1;
+    /*
+    if(140 <= u8BlinkCount && u8BlinkCount <= 160)
+    {
+      //LCDCommand(LCD_CLEAR_CMD);
+      //LCDClearChars(0x40,0x53);
+      LCDMessage(LINE2_START_ADDR, au8DataContent_Rate4);
+      // LCDMessage(LINE2_END, au8DataContent_Rate5);
+     }
+    */
+   }
+   
+  
+  if(WasButtonPressed(BUTTON2))
+  {
+    ButtonAcknowledge(BUTTON2);
+    u8BlinkCount=u8BlinkCount-1;
+  }  
 } /* end UserApp1SM_Idle() */
     
 
