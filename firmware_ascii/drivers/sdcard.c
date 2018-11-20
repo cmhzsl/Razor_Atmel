@@ -63,7 +63,7 @@ static SspConfigurationType SD_sSspConfig;         /* Configuration information 
 static SspPeripheralType* SD_Ssp;                  /* Pointer to SSP peripheral object */
 
 static u8 SD_au8RxBuffer[SDCARD_RX_BUFFER_SIZE];   /* Space for incoming bytes from the SD card */
-static u8 *SD_pu8RxBufferNextByte;                 /* Pointer to next spot in RxBuffer to write a byte */
+static u8 SD_pu8RxBufferNextByte;                 /* Pointer to next spot in RxBuffer to write a byte */
 //static u8 *SD_pu8RxBufferParser;                   /* Pointer to loop through the Rx buffer to read bytes */
 
 static u32 SD_u32Timeout;                          /* Timeout counter used across states */
